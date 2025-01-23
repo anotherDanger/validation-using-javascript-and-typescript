@@ -15,14 +15,16 @@
                     <div class="mb-3">
                         <label for="username" class="form-label text-light">Username</label>
                         <input type="text" class="form-control" id="username" required>
-                        <div id="emailHelp" class="form-text text-light">Insert Your Username.</div>
+                        <div id="usernameFlash" class="form-text text-danger"></div>
+                        <div id="usernamePlaceholder" class="form-text text-light">Insert Your Username.</div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label text-light">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <label for="password" class="form-label text-light">Password</label>
+                        <input type="password" class="form-control" id="password">
+                        <div id="passwordFlasher" class="form-text text-danger"></div>
                     </div>
                     
-                    <button type="submit" id="btn" class="btn btn-danger">Submit</button>
+                    <button type="button" id="btn" class="btn btn-danger">Submit</button>
                 </form>
             </div>
         </div>
