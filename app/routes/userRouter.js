@@ -1,9 +1,12 @@
 import express from 'express';
-import {createUser} from '../controller/userController.js';
+import {createUser, getAllUsers} from '../controller/userController.js';
 import cors from 'cors';
-
+import { generateJWT, verifyJWT } from '../middlewares/userMiddleware.js';
+import dotenv from 'dotenv';
+dotenv.config();
 const router = express();
 router.use(cors());
 const userRouter = express.Router();
-userRouter.post('/users', createUser);
+userRouter.post('/users', generateJWT, createUser);
+userRouter.get('/users', verifyJWT, getAllUsers);
 export default userRouter;
