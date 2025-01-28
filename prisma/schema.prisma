@@ -1,0 +1,17 @@
+datasource db {
+  provider = "mysql" // pastikan sesuai dengan provider yang digunakan
+  url      = env("DATABASE_URL") // menggunakan URL dari .env
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//model user
+model User {
+  id Int @id @default(autoincrement())
+  nim String @unique
+  nama String
+  email String @unique
+  prodi String
+}
