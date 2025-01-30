@@ -23,9 +23,13 @@ document.getElementById('btn').addEventListener('click', async () => {
 
         if(response.ok)
         {
-            console.log('Login successful', data);
-        }else{
-            console.error('Login failed', data);
+            if(response.status === 201)
+            {
+                window.location.href = '../index2.html';
+            }
+        }else if(response.status === 500)
+        {
+            window.location.href = '../index3.html';
         }
     }catch(error)
     {

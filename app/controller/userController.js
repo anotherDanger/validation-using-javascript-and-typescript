@@ -7,28 +7,37 @@ export const createUser = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // Validasi data (optional)
         if (!username || !password) {
             return res.status(400).json({ message: 'Username and password are required' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        try{
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await prisma.user.create({
+            const user = await prisma.user.create({
             data: {
                 username,
                 password: hashedPassword,
             },
-        });
+            });
 
-        const token = req.token;
-
-        res.status(201).json({
-            message: 'Login success',
-            apiKey: 111,
-            token: req.token,
-            user: user
-        });
+            res.status(201).json({
+                message: 'Login success',
+                apiKey: 111,
+                token: req.token,
+                user: user
+            });
+        }catch(error)
+        {
+            if(error.code === 'P2002')
+            {
+                console.error('Username already taken!');
+                res.status(500).json({message: 'Username already taken!'});
+            }else{
+                console.error('Another error');
+                return;
+            }
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to create user', error });
